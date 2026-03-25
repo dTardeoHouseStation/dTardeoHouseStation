@@ -3,212 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dTardeo House Station | Sunset Experience</title>
+    <title>dTardeo House Station | Live</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body, html {
             height: 100%;
             font-family: 'Montserrat', sans-serif;
-            background-color: #000;
+            background-color: #111; /* Un gris muy oscuro en lugar de negro total */
             color: white;
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
 
-        /* ----- FONDO DE MOSAICO (repeat.png) ----- */
+        /* FONDO DE MOSAICO CORREGIDO */
         .background-texture {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('repeat.png');
             background-repeat: repeat;
             background-position: center;
-            opacity: 0.2;
-            z-index: -2;
-        }
-
-        .gradient-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.9) 100%);
+            background-size: 400px; /* Tamaño del patrón ajustable */
+            opacity: 0.3; /* Aumentamos un poco para que se vea, pero no tape */
             z-index: -1;
         }
 
-        /* ----- HEADER / BARRA SUPERIOR ----- */
+        /* HEADER */
         header {
             position: fixed;
-            top: 0;
-            width: 100%;
-            height: 100px;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(20px);
+            top: 0; width: 100%; height: 90px;
+            background: rgba(0, 0, 0, 0.85); /* Más sólido para que se vea el menú */
+            backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 40px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0 30px;
+            border-bottom: 1px solid rgba(255, 170, 0, 0.3);
             z-index: 1000;
         }
 
-        /* Logo Izquierda */
-        .logo-img {
-            height: 65px;
-            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.3));
-        }
+        .logo-img { height: 50px; }
 
-        /* Menú Centrado */
-        .header-nav {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin: 0 15px;
-        }
-
+        .nav-links { display: flex; list-style: none; gap: 20px; }
         .nav-links a {
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: 0.3s;
+            text-decoration: none; color: #fff; font-size: 0.75rem;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
         }
 
-        .nav-links a:hover {
-            color: #ffaa00;
-        }
-
-        /* Contenedor del Reproductor a la Derecha */
+        /* REPRODUCTOR */
         .header-player {
             display: flex;
             align-items: center;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 8px 15px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 170, 0, 0.2);
-            min-width: 200px;
-            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 8px;
         }
 
-        .live-tag {
-            color: #ff3e3e;
-            font-size: 8px;
-            font-weight: 900;
-            letter-spacing: 1px;
-            margin-right: 15px;
-            animation: blink 2s infinite;
-        }
+        .cstrEmbed { transform: scale(0.8); transform-origin: right center; }
 
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-
-        /* Widget Caster.fm */
-        .cstrEmbed {
-            transform: scale(0.9);
-            transform-origin: right center;
-        }
-
-        /* ----- CUERPO CENTRAL ----- */
+        /* HERO */
         .main-content {
             height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 20px;
         }
 
-        .main-logo-big {
-            max-width: 450px;
-            width: 85%;
-            filter: drop-shadow(0px 15px 40px rgba(0,0,0,0.9));
-        }
+        .main-logo-big { max-width: 350px; width: 80%; filter: drop-shadow(0 0 20px #000); }
 
-        .location-tag {
-            margin-top: 25px;
-            font-size: 0.7rem;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            color: #ffaa00;
-            font-weight: 700;
-            opacity: 0.8;
-        }
-
-        /* RESPONSIVE MÓVIL */
         @media (max-width: 768px) {
-            header {
-                height: auto;
-                flex-direction: column;
-                padding: 20px;
-                gap: 15px;
-            }
-            .header-nav {
-                position: static;
-                transform: none;
-            }
-            .nav-links li {
-                margin: 0 10px;
-            }
-            .main-logo-big {
-                max-width: 300px;
-            }
+            header { height: auto; padding: 15px; flex-direction: column; gap: 10px; }
+            .nav-links { gap: 10px; }
+            .main-logo-big { max-width: 250px; }
         }
     </style>
 </head>
 <body>
 
     <div class="background-texture"></div>
-    <div class="gradient-overlay"></div>
 
     <header>
         <div class="header-logo">
-            <a href="#">
-                <img src="logo.png" alt="dTardeo House Station" class="logo-img">
-            </a>
+            <img src="logo.png" alt="dTardeo" class="logo-img">
         </div>
 
-        <nav class="header-nav">
+        <nav>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#schedule">Schedule</a></li>
-                <li><a href="#artists">Artists</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Schedule</a></li>
+                <li><a href="#">Contact</a></li>
             </ul>
         </nav>
 
         <div class="header-player">
-            <span class="live-tag">ON AIR</span>
-            
             <div class="cstrEmbed" data-type="newStreamPlayer" data-publicToken="1f51f40c-d821-4ec5-9f7d-18e5384f69be" data-theme="dark" data-color="6C2BDD" data-channelId="" data-rendered="false">
-                <a href="https://www.caster.fm">Shoutcast Hosting</a> 
-                <a href="https://www.caster.fm">Stream Hosting</a> 
-                <a href="https://www.caster.fm">Radio Server Hosting</a>
+                <a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a>
             </div>
         </div>
     </header>
 
-    <main class="main-content" id="home">
+    <main class="main-content">
         <img src="logo.png" alt="dTardeo House Station" class="main-logo-big">
-        <div class="location-tag">Benalmádena • Costa del Sol</div>
     </main>
 
     <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
