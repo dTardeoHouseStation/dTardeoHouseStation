@@ -11,7 +11,7 @@
         body, html {
             height: 100%;
             font-family: 'Montserrat', sans-serif;
-            background-color: #1a0f00;
+            background-color: #000;
             color: white;
             overflow: hidden;
         }
@@ -29,7 +29,7 @@
         header {
             position: fixed;
             top: 0; width: 100%; height: 80px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(25px);
             display: flex;
             justify-content: space-between;
@@ -40,7 +40,7 @@
         }
 
         .nav-links { display: flex; list-style: none; }
-        .nav-links li { margin-right: 30px; }
+        .nav-links li { margin-right: 25px; }
         .nav-links a {
             text-decoration: none; color: #fff; font-size: 0.75rem;
             font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
@@ -48,7 +48,7 @@
         }
         .nav-links a:hover { opacity: 1; color: #ffaa00; }
 
-        /* REPRODUCTOR NATIVO MINIMALISTA */
+        /* CONTENEDOR REPRODUCTOR (DERECHA) */
         .player-container {
             display: flex;
             align-items: center;
@@ -62,16 +62,12 @@
 
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* Estilo para el reproductor de audio nativo */
-        audio {
-            height: 35px;
-            width: 150px; /* Ajuste para que se vea solo el Play/Pause en muchos navegadores */
-            filter: invert(100%) hue-rotate(180deg) brightness(1.5); /* Lo hace blanco/dorado */
-            opacity: 0.8;
-            transition: 0.3s;
+        /* Ajuste visual del widget oficial */
+        .cstrEmbed {
+            transform: scale(0.9);
+            transform-origin: right center;
+            min-width: 150px;
         }
-        
-        audio:hover { opacity: 1; }
 
         .hero {
             height: 100vh;
@@ -88,16 +84,21 @@
             filter: drop-shadow(0px 15px 40px rgba(0,0,0,0.9));
         }
 
-        .location-tag {
-            margin-top: 25px; font-size: 0.65rem; letter-spacing: 6px;
-            text-transform: uppercase; color: #ffaa00; font-weight: 700; opacity: 0.8;
+        footer {
+            position: fixed;
+            bottom: 15px;
+            width: 100%;
+            text-align: center;
+            font-size: 10px;
+            opacity: 0.4;
         }
+
+        footer a { color: white; text-decoration: none; margin: 0 5px; }
 
         @media (max-width: 768px) {
             header { padding: 0 20px; }
             .nav-links { display: none; }
             .main-logo { max-width: 280px; }
-            audio { width: 110px; }
         }
     </style>
 </head>
@@ -118,17 +119,28 @@
         <div class="player-container">
             <span class="live-tag">ON AIR</span>
             
-            <audio controls>
-                <source src="https://dtardeohousestation.ismyradio.com/stream" type="audio/mpeg">
-                Tu navegador no soporta la radio.
-            </audio>
+            <div class="cstrEmbed" 
+                 data-type="newStreamPlayer" 
+                 data-publicToken="1f51f40c-d821-4ec5-9f7d-18e5384f69be" 
+                 data-theme="dark" 
+                 data-color="ffaa00" 
+                 data-channelId="" 
+                 data-rendered="false">
+            </div>
         </div>
     </header>
 
     <main class="hero">
         <img src="logo.png" alt="dTardeo House Station" class="main-logo">
-        
     </main>
+
+    <footer>
+        &copy; 2026 dTardeo House Station | 
+        <a href="https://www.caster.fm">Radio Hosting</a> | 
+        <a href="https://www.caster.fm">Free Shoutcast</a>
+    </footer>
+
+    <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
 
 </body>
 </html>
