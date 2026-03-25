@@ -16,6 +16,7 @@
             overflow: hidden;
         }
 
+        /* FONDO COMBINADO CON TU IMAGEN */
         .background-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -26,50 +27,62 @@
             z-index: -1;
         }
 
+        /* BARRA SUPERIOR */
         header {
             position: fixed;
-            top: 0; width: 100%; height: 90px;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(20px);
+            top: 0; width: 100%; height: 80px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(25px);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 30px;
+            padding: 0 40px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 1000;
         }
 
         /* MENÚ IZQUIERDA */
-        .nav-links { display: flex; list-style: none; align-items: center; }
-        .nav-links li { margin-right: 20px; }
+        .nav-links { display: flex; list-style: none; }
+        .nav-links li { margin-right: 25px; }
         .nav-links a {
-            text-decoration: none; color: #fff; font-size: 0.7rem;
-            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-            opacity: 0.6; transition: 0.3s;
+            text-decoration: none; color: #fff; font-size: 0.75rem;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+            transition: 0.3s; opacity: 0.6;
         }
         .nav-links a:hover { opacity: 1; color: #ffaa00; }
 
-        /* CONTENEDOR DEL REPRODUCTOR (DERECHA) */
-        .player-box {
+        /* CONTENEDOR REPRODUCTOR (DERECHA) */
+        .player-wrapper {
             display: flex;
             align-items: center;
+            gap: 15px;
             background: rgba(255, 255, 255, 0.05);
             padding: 5px 15px;
-            border-radius: 10px;
+            border-radius: 12px;
             border: 1px solid rgba(255, 170, 0, 0.2);
-            min-width: 200px; /* Espacio suficiente para que el widget respire */
-            height: 50px;
-            justify-content: center;
         }
 
         .live-tag {
-            color: #ff3e3e; font-size: 8px; font-weight: 900;
-            margin-right: 10px; animation: blink 2s infinite;
+            color: #ff3e3e; font-size: 9px; font-weight: 900;
+            letter-spacing: 1px; animation: blink 2s infinite;
         }
 
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* LOGO CENTRAL */
+        /* Ajuste visual del widget oficial */
+        .cstrEmbed {
+            transform: scale(0.9);
+            transform-origin: right center;
+        }
+
+        /* Ocultación elegante de los links obligatorios */
+        .cstrEmbed a {
+            font-size: 1px;
+            color: rgba(0,0,0,0.1);
+            text-decoration: none;
+            pointer-events: none;
+        }
+
         .hero {
             height: 100vh;
             display: flex;
@@ -80,19 +93,14 @@
         }
 
         .main-logo {
-            max-width: 380px; width: 80%;
+            max-width: 400px; width: 85%;
             filter: drop-shadow(0px 15px 40px rgba(0,0,0,0.9));
         }
 
-        .location-tag {
-            margin-top: 20px; font-size: 0.6rem; letter-spacing: 5px;
-            text-transform: uppercase; color: #ffaa00; font-weight: 700; opacity: 0.8;
-        }
-
         @media (max-width: 768px) {
-            header { height: 120px; flex-direction: column; justify-content: space-around; padding: 10px; }
-            .nav-links { margin-bottom: 10px; }
-            .main-logo { max-width: 250px; }
+            header { padding: 0 20px; }
+            .nav-links { display: none; }
+            .main-logo { max-width: 280px; }
         }
     </style>
 </head>
@@ -109,8 +117,8 @@
             </ul>
         </nav>
 
-        <div class="player-box">
-            <span class="live-tag">LIVE</span>
+        <div class="player-wrapper">
+            <span class="live-tag">ON AIR</span>
             
             <div class="cstrEmbed" 
                  data-type="newStreamPlayer" 
@@ -120,14 +128,14 @@
                  data-channelId="" 
                  data-rendered="false">
                  
-                <a href="https://www.caster.fm" style="display:none;">Radio Hosting</a> 
+                <a href="https://www.caster.fm">Radio Hosting</a>
+                <a href="https://www.caster.fm">Shoutcast Hosting</a>
             </div>
         </div>
     </header>
 
     <main class="hero">
         <img src="logo.png" alt="dTardeo House Station" class="main-logo">
-        <div class="location-tag">Benalmádena • Costa del Sol</div>
     </main>
 
     <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
