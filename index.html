@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dTardeo House Station | Sunset Radio</title>
+    <title>dTardeo House Station | Sunset Experience</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         * {
@@ -17,71 +17,43 @@
             font-family: 'Montserrat', sans-serif;
             background-color: #1a0f00;
             color: white;
-            scroll-behavior: smooth;
             overflow-x: hidden;
         }
 
-        /* FONDO DINÁMICO CON MOVIMIENTO */
-        .background-overlay {
+        /* FONDO QUE COMBINA TU IMAGEN Y EL DEGRADADO DEL LOGO */
+        .background-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('fondo.png') no-repeat center center fixed;
+            background: 
+                linear-gradient(135deg, rgba(255, 62, 107, 0.4) 0%, rgba(255, 140, 0, 0.4) 50%, rgba(0, 0, 0, 0.8) 100%),
+                url('fondo.png') no-repeat center center fixed;
             background-size: cover;
-            z-index: -3;
+            z-index: -1;
         }
 
-        .animated-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* Mezcla de colores cálidos de atardecer */
-            background: linear-gradient(45deg, rgba(255, 140, 0, 0.3), rgba(255, 0, 128, 0.2), rgba(0, 0, 0, 0.6));
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            z-index: -2;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* MENÚ SUPERIOR CÁLIDO */
-        nav {
+        /* BARRA SUPERIOR (HEADER) */
+        header {
             position: fixed;
             top: 0;
             width: 100%;
-            height: 100px;
-            background: rgba(40, 20, 0, 0.4);
+            height: 70px;
+            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(20px);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 60px;
-            border-bottom: 2px solid rgba(255, 170, 0, 0.2);
+            padding: 0 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 1000;
         }
 
-        .nav-logo-container {
+        /* MENÚ A LA IZQUIERDA */
+        .nav-left {
             display: flex;
             align-items: center;
-            text-decoration: none;
-        }
-
-        .nav-logo-image {
-            height: 70px;
-            filter: drop-shadow(0px 0px 10px rgba(255, 170, 0, 0.5));
-            transition: transform 0.3s ease;
-        }
-
-        .nav-logo-image:hover {
-            transform: scale(1.05);
         }
 
         .nav-links {
@@ -89,137 +61,107 @@
             list-style: none;
         }
 
+        .nav-links li {
+            margin-right: 25px;
+        }
+
         .nav-links a {
             text-decoration: none;
             color: #fff;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
-            padding: 10px 20px;
             transition: 0.3s;
-            position: relative;
+            opacity: 0.7;
         }
 
         .nav-links a:hover {
+            opacity: 1;
             color: #ffaa00;
-            text-shadow: 0 0 10px rgba(255, 170, 0, 0.8);
         }
 
-        /* REPRODUCTOR CON "GLOW" */
-        .main-content {
+        /* REPRODUCTOR A LA DERECHA (MINIMALISTA) */
+        .player-right {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 5px 15px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 170, 0, 0.3);
+            max-height: 45px;
+        }
+
+        /* Ajuste del widget de Caster para que sea pequeño */
+        .cstrEmbed {
+            transform: scale(0.8); /* Reducimos el tamaño general */
+            transform-origin: right center;
+        }
+
+        /* CONTENIDO CENTRAL (LOGO GRANDE) */
+        .hero {
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            padding-top: 100px;
-        }
-
-        .player-wrapper {
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(15px);
-            padding: 60px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 170, 0, 0.3);
-            width: 95%;
-            max-width: 500px;
             text-align: center;
-            box-shadow: 0 0 40px rgba(255, 140, 0, 0.2), inset 0 0 20px rgba(255, 140, 0, 0.1);
-            animation: float 6s ease-in-out infinite;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
+        .main-logo {
+            max-width: 350px;
+            width: 80%;
+            filter: drop-shadow(0px 10px 30px rgba(0,0,0,0.8));
+            animation: pulse 4s ease-in-out infinite;
         }
 
-        .station-subtitle {
-            font-size: 1rem;
-            color: #ffcc00;
-            font-weight: 900;
-            letter-spacing: 8px;
-            margin-bottom: 10px;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.03); opacity: 1; }
+        }
+
+        .view-more {
+            margin-top: 30px;
+            font-size: 0.7rem;
+            letter-spacing: 5px;
             text-transform: uppercase;
+            opacity: 0.5;
         }
 
-        .live-indicator {
-            display: inline-block;
-            background: #ff0055;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 5px;
-            font-size: 10px;
-            font-weight: 900;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-            box-shadow: 0 0 15px rgba(255, 0, 85, 0.6);
-        }
-
-        /* SECCIONES DINÁMICAS */
-        .section {
-            padding: 100px 20px;
-            min-height: 80vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(20, 10, 0, 0.8);
-        }
-
-        .section h2 {
-            font-size: 3rem;
-            color: #ffaa00;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 0px #550000;
-        }
-
-        /* RESPONSIVE */
+        /* RESPONSIVO */
         @media (max-width: 768px) {
-            nav { padding: 0 20px; height: 80px; }
-            .nav-links { display: none; }
-            .player-wrapper { padding: 40px 20px; }
-            .section h2 { font-size: 2rem; }
+            header { padding: 0 15px; }
+            .nav-links li { margin-right: 15px; }
+            .nav-links a { font-size: 0.6rem; }
+            .main-logo { max-width: 250px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="background-overlay"></div>
-    <div class="animated-gradient"></div>
+    <div class="background-container"></div>
 
-    <nav>
-        <a href="#home" class="nav-logo-container">
-            <img src="logo.png" alt="dTardeo Logo" class="nav-logo-image">
-        </a>
-        <ul class="nav-links">
-            <li><a href="#home">Stream</a></li>
-            <li><a href="#horario">Sessions</a></li>
-            <li><a href="#artistas">Artists</a></li>
-            <li><a href="#contacto">Join Us</a></li>
-        </ul>
-    </nav>
+    <header>
+        <div class="nav-left">
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Schedule</a></li>
+                <li><a href="#">Artists</a></li>
+            </ul>
+        </div>
 
-    <div class="main-content" id="home">
-        <div class="player-wrapper">
-            <span class="station-subtitle">dTARDEO</span>
-            <span class="live-indicator">LIVE SESSION</span>
-            
+        <div class="player-right">
             <div class="cstrEmbed" data-type="newStreamPlayer" data-publicToken="1f51f40c-d821-4ec5-9f7d-18e5384f69be" data-theme="dark" data-color="FFAA00" data-channelId="" data-rendered="false">
-                <a href="https://www.caster.fm">Radio Hosting</a>
-            </div>
-            <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
+                </div>
         </div>
-    </div>
+    </header>
 
-    <div class="section" id="horario">
-        <div class="section-content" style="text-align: center;">
-            <h2>Magic Hours</h2>
-            <p style="font-size: 1.2rem; line-height: 1.8; color: #ffcc99;">
-                Música House sin interrupciones.<br>
-                Desde el amanecer hasta el último rayo de sol.
-            </p>
-        </div>
-    </div>
+    <main class="hero">
+        <img src="logo.png" alt="dTardeo House Station" class="main-logo">
+        <div class="view-more">Desliza para descubrir • Benalmádena</div>
+    </main>
 
-    </body>
+    <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
+
+</body>
 </html>
