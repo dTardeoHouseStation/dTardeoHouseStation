@@ -87,4 +87,131 @@
             text-decoration: none;
             color: rgba(255, 255, 255, 0.8);
             font-size: 0.75rem;
-            font-weight
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffaa00;
+        }
+
+        /* Contenedor del Reproductor a la Derecha */
+        .header-player {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 170, 0, 0.2);
+            min-width: 200px;
+            justify-content: center;
+        }
+
+        .live-tag {
+            color: #ff3e3e;
+            font-size: 8px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            margin-right: 15px;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+        /* Widget Caster.fm */
+        .cstrEmbed {
+            transform: scale(0.9);
+            transform-origin: right center;
+        }
+
+        /* ----- CUERPO CENTRAL ----- */
+        .main-content {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .main-logo-big {
+            max-width: 450px;
+            width: 85%;
+            filter: drop-shadow(0px 15px 40px rgba(0,0,0,0.9));
+        }
+
+        .location-tag {
+            margin-top: 25px;
+            font-size: 0.7rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #ffaa00;
+            font-weight: 700;
+            opacity: 0.8;
+        }
+
+        /* RESPONSIVE MÓVIL */
+        @media (max-width: 768px) {
+            header {
+                height: auto;
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+            }
+            .header-nav {
+                position: static;
+                transform: none;
+            }
+            .nav-links li {
+                margin: 0 10px;
+            }
+            .main-logo-big {
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-texture"></div>
+    <div class="gradient-overlay"></div>
+
+    <header>
+        <div class="header-logo">
+            <a href="#">
+                <img src="logo.png" alt="dTardeo House Station" class="logo-img">
+            </a>
+        </div>
+
+        <nav class="header-nav">
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#artists">Artists</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-player">
+            <span class="live-tag">ON AIR</span>
+            
+            <div class="cstrEmbed" data-type="newStreamPlayer" data-publicToken="1f51f40c-d821-4ec5-9f7d-18e5384f69be" data-theme="dark" data-color="6C2BDD" data-channelId="" data-rendered="false">
+                <a href="https://www.caster.fm">Shoutcast Hosting</a> 
+                <a href="https://www.caster.fm">Stream Hosting</a> 
+                <a href="https://www.caster.fm">Radio Server Hosting</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content" id="home">
+        <img src="logo.png" alt="dTardeo House Station" class="main-logo-big">
+        <div class="location-tag">Benalmádena • Costa del Sol</div>
+    </main>
+
+    <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
+
+</body>
+</html>
