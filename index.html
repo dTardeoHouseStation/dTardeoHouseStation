@@ -6,11 +6,7 @@
     <title>dTardeo House Station | Sunset Experience</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body, html {
             height: 100%;
@@ -21,13 +17,9 @@
             scroll-behavior: smooth;
         }
 
-        /* FONDO COMBINADO */
         .background-container {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: 
                 linear-gradient(135deg, rgba(212, 63, 141, 0.4) 0%, rgba(255, 140, 0, 0.4) 50%, rgba(0, 0, 0, 0.8) 100%),
                 url('fondo.png') no-repeat center center fixed;
@@ -37,9 +29,7 @@
 
         header {
             position: fixed;
-            top: 0;
-            width: 100%;
-            height: 80px;
+            top: 0; width: 100%; height: 80px;
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(25px);
             display: flex;
@@ -50,65 +40,50 @@
             z-index: 1000;
         }
 
-        /* MENÚ IZQUIERDA */
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin-right: 30px;
-        }
-
+        .nav-links { display: flex; list-style: none; }
+        .nav-links li { margin-right: 30px; }
         .nav-links a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: 0.3s;
-            opacity: 0.6;
+            text-decoration: none; color: #fff; font-size: 0.75rem;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+            transition: 0.3s; opacity: 0.6;
         }
+        .nav-links a:hover { opacity: 1; color: #ffaa00; }
 
-        .nav-links a:hover {
-            opacity: 1;
-            color: #ffaa00;
-        }
-
-        /* REPRODUCTOR: SOLO BOTÓN PLAY */
+        /* REPRODUCTOR CORREGIDO: BOTÓN PULSABLE */
         .player-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
 
         .live-tag {
-            color: #ff3e3e;
-            font-size: 9px;
-            font-weight: 900;
-            letter-spacing: 1px;
-            animation: blink 2s infinite;
+            color: #ff3e3e; font-size: 9px; font-weight: 900;
+            letter-spacing: 1px; animation: blink 2s infinite;
         }
 
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* TRUCO DE MÁSCARA PARA EL WIDGET */
-        .cstr-mask {
-            width: 45px;  /* Ancho del botón */
-            height: 45px; /* Alto del botón */
-            overflow: hidden;
+        /* Contenedor circular que permite el clic */
+        .play-button-zone {
+            width: 50px;
+            height: 50px;
             position: relative;
             border-radius: 50%;
             border: 2px solid #ffaa00;
-            box-shadow: 0 0 15px rgba(255, 170, 0, 0.4);
+            background: rgba(255, 170, 0, 0.1);
+            overflow: hidden; /* Esto recorta el resto del widget */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 170, 0, 0.3);
         }
 
+        /* Ajuste fino del widget dentro del círculo */
         .cstrEmbed {
             position: absolute;
-            top: -2px;   /* Ajuste para centrar el icono de Play */
-            left: -5px;  /* Ajuste para centrar el icono de Play */
-            transform: scale(1.1);
+            transform: scale(1.6); /* Agrandamos el widget para que el botón ocupe todo el círculo */
+            pointer-events: auto; /* Asegura que los clics pasen al widget */
         }
 
         .hero {
@@ -122,19 +97,13 @@
         }
 
         .main-logo {
-            max-width: 400px;
-            width: 85%;
+            max-width: 400px; width: 85%;
             filter: drop-shadow(0px 15px 40px rgba(0,0,0,0.9));
         }
 
         .location-tag {
-            margin-top: 25px;
-            font-size: 0.65rem;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            color: #ffaa00;
-            font-weight: 700;
-            opacity: 0.8;
+            margin-top: 25px; font-size: 0.65rem; letter-spacing: 6px;
+            text-transform: uppercase; color: #ffaa00; font-weight: 700; opacity: 0.8;
         }
 
         @media (max-width: 768px) {
@@ -161,7 +130,7 @@
         <div class="player-container">
             <span class="live-tag">ON AIR</span>
             
-            <div class="cstr-mask">
+            <div class="play-button-zone">
                 <div class="cstrEmbed" 
                      data-type="newStreamPlayer" 
                      data-publicToken="1f51f40c-d821-4ec5-9f7d-18e5384f69be" 
