@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dTardeo House Station | Sunset Experience</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
@@ -13,8 +13,7 @@
             font-family: 'Montserrat', sans-serif;
             background-color: #1a0f00;
             color: white;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            overflow: hidden;
         }
 
         .background-container {
@@ -49,7 +48,7 @@
         }
         .nav-links a:hover { opacity: 1; color: #ffaa00; }
 
-        /* REPRODUCTOR CORREGIDO: BOTÓN PULSABLE */
+        /* REPRODUCTOR NATIVO MINIMALISTA */
         .player-container {
             display: flex;
             align-items: center;
@@ -63,28 +62,16 @@
 
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* Contenedor circular que permite el clic */
-        .play-button-zone {
-            width: 50px;
-            height: 50px;
-            position: relative;
-            border-radius: 50%;
-            border: 2px solid #ffaa00;
-            background: rgba(255, 170, 0, 0.1);
-            overflow: hidden; /* Esto recorta el resto del widget */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 170, 0, 0.3);
+        /* Estilo para el reproductor de audio nativo */
+        audio {
+            height: 35px;
+            width: 150px; /* Ajuste para que se vea solo el Play/Pause en muchos navegadores */
+            filter: invert(100%) hue-rotate(180deg) brightness(1.5); /* Lo hace blanco/dorado */
+            opacity: 0.8;
+            transition: 0.3s;
         }
-
-        /* Ajuste fino del widget dentro del círculo */
-        .cstrEmbed {
-            position: absolute;
-            transform: scale(1.6); /* Agrandamos el widget para que el botón ocupe todo el círculo */
-            pointer-events: auto; /* Asegura que los clics pasen al widget */
-        }
+        
+        audio:hover { opacity: 1; }
 
         .hero {
             height: 100vh;
@@ -110,6 +97,7 @@
             header { padding: 0 20px; }
             .nav-links { display: none; }
             .main-logo { max-width: 280px; }
+            audio { width: 110px; }
         }
     </style>
 </head>
@@ -130,20 +118,10 @@
         <div class="player-container">
             <span class="live-tag">ON AIR</span>
             
-            <div class="play-button-zone">
-                <div class="cstrEmbed" 
-                     data-type="newStreamPlayer" 
-                     data-publicToken="1f51f40c-d821-4ec5-9f7d-18e5384f69be" 
-                     data-theme="dark" 
-                     data-color="FFAA00" 
-                     data-channelId="" 
-                     data-rendered="false">
-                     
-                    <a href="https://www.caster.fm" style="display:none;">Shoutcast Hosting</a> 
-                    <a href="https://www.caster.fm" style="display:none;">Stream Hosting</a> 
-                    <a href="https://www.caster.fm" style="display:none;">Radio Server Hosting</a>
-                </div>
-            </div>
+            <audio controls>
+                <source src="https://dtardeohousestation.ismyradio.com/stream" type="audio/mpeg">
+                Tu navegador no soporta la radio.
+            </audio>
         </div>
     </header>
 
@@ -151,8 +129,6 @@
         <img src="logo.png" alt="dTardeo House Station" class="main-logo">
         <div class="location-tag">Benalmádena • Costa del Sol</div>
     </main>
-
-    <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
 
 </body>
 </html>
