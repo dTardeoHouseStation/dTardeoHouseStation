@@ -113,6 +113,35 @@
             &copy; 2026 dTardeo House Station | All Rights Reserved
         </footer>
     </div>
+<script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
 
+    <script>
+        window.addEventListener('load', function() {
+            // Esperamos un momento para asegurarnos de que el widget de Caster.fm se ha cargado
+            setTimeout(function() {
+                // Buscamos el elemento de audio que crea el widget de Caster.fm
+                var cstrPlayer = document.querySelector('.cstrEmbed audio');
+                
+                if (cstrPlayer) {
+                    // Intentamos reproducir
+                    var playPromise = cstrPlayer.play();
+
+                    // Manejamos la promesa (necesario para navegadores modernos)
+                    if (playPromise !== undefined) {
+                        playPromise.then(_ => {
+                            // Autoplay exitoso
+                            console.log("Autoplay exitoso.");
+                        }).catch(error => {
+                            // Autoplay bloqueado por el navegador
+                            console.log("El navegador bloqueó el autoplay. Se requiere interacción del usuario.");
+                            // Aquí podrías mostrar un mensaje al usuario: "Haz clic en Play para escuchar".
+                        });
+                    }
+                }
+            }, 2000); // Espera 2 segundos (ajustar si es necesario)
+        });
+    </script>
+</body>
+</html>
 </body>
 </html>
