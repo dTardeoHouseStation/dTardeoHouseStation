@@ -17,9 +17,10 @@
             font-family: 'Montserrat', sans-serif;
             background-color: #000;
             color: white;
+            scroll-behavior: smooth; /* Desplazamiento suave para el menú */
         }
 
-        /* FONDO DE IMAGEN */
+        /* FONDO DE IMAGEN (TU IMAGEN ORIGINAL) */
         .background-overlay {
             position: fixed;
             top: 0;
@@ -28,7 +29,7 @@
             height: 100%;
             background: url('fondo.png') no-repeat center center fixed;
             background-size: cover;
-            filter: brightness(0.6);
+            filter: brightness(0.6); /* Oscurece un poco para que resalte la web */
             z-index: -2;
         }
 
@@ -42,14 +43,14 @@
             z-index: -1;
         }
 
-        /* MENÚ TIPO IBIZA STARDUST */
+        /* MENÚ DE NAVEGACIÓN SUPERIOR (ESTILO IBIZA) */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            height: 80px;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(15px);
+            height: 90px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px); /* Efecto cristal esmerilado */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -58,12 +59,25 @@
             z-index: 1000;
         }
 
-        .nav-logo {
-            font-weight: 700;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            color: #fff;
+        .nav-logo-container {
+            display: flex;
+            align-items: center;
             text-decoration: none;
+            color: #fff;
+        }
+
+        /* INTEGRACIÓN DEL NUEVO LOGO */
+        .nav-logo-image {
+            height: 60px; /* Tamaño del logo en el menú */
+            margin-right: 15px;
+            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.3));
+        }
+
+        .nav-logo-text {
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .nav-links {
@@ -78,15 +92,15 @@
         .nav-links a {
             text-decoration: none;
             color: rgba(255, 255, 255, 0.8);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 400;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             transition: 0.3s;
         }
 
         .nav-links a:hover {
-            color: #6C2BDD;
+            color: #6C2BDD; /* Color morado de Caster.fm */
         }
 
         /* CONTENIDO PRINCIPAL */
@@ -97,42 +111,62 @@
             align-items: center;
             height: 100vh;
             text-align: center;
-            padding-top: 80px; /* Espacio para el menú fijo */
+            padding-top: 90px; /* Espacio para el menú fijo */
         }
 
         .player-wrapper {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 25px;
+            padding: 50px;
+            border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             width: 90%;
             max-width: 450px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.7);
         }
 
-        .station-title {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
+        .station-subtitle {
+            font-size: 0.9rem;
+            color: #ffaa00; /* Color dorado sunset */
             font-weight: 700;
-            letter-spacing: 1px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            display: block;
         }
 
         .live-indicator {
             color: #6C2BDD;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             text-transform: uppercase;
             letter-spacing: 4px;
             display: block;
         }
 
+        /* ESTILOS DE SECCIONES (PARA EL MENÚ) */
+        .section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,0.9);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 50px;
+        }
+
+        .section-content {
+            max-width: 800px;
+            text-align: center;
+        }
+
         /* RESPONSIVE PARA MÓVILES */
         @media (max-width: 768px) {
-            nav { padding: 0 20px; }
+            nav { padding: 0 20px; height: 70px; }
             .nav-links { display: none; } /* Ocultamos links en móvil para simplificar */
-            .nav-logo { font-size: 1rem; }
+            .nav-logo-image { height: 40px; }
+            .nav-logo-text { font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -142,19 +176,22 @@
     <div class="gradient-overlay"></div>
 
     <nav>
-        <a href="#" class="nav-logo">dTARDEO HOUSE</a>
+        <a href="#home" class="nav-logo-container">
+            <img src="logo.png" alt="dTardeo Logo" class="nav-logo-image">
+            <span class="nav-logo-text">dTARDEO HOUSE</span>
+        </a>
         <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Schedule</a></li>
-            <li><a href="#">Artists</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#home">Escuchar</a></li>
+            <li><a href="#horario">Horario</a></li>
+            <li><a href="#artistas">Artistas</a></li>
+            <li><a href="#contacto">Contacto</a></li>
         </ul>
     </nav>
 
-    <div class="main-content">
+    <div class="main-content" id="home">
         <div class="player-wrapper">
+            <span class="station-subtitle">Premium Radio</span>
             <span class="live-indicator">On Air Now</span>
-            <h1 class="station-title">HOUSE STATION</h1>
             
             <div class="cstrEmbed" data-type="newStreamPlayer" data-publicToken="1f51f40c-d821-4ec5-9f7d-18e5384f69be" data-theme="dark" data-color="6C2BDD" data-channelId="" data-rendered="false">
                 <a href="https://www.caster.fm">Shoutcast Hosting</a> 
@@ -162,6 +199,27 @@
                 <a href="https://www.caster.fm">Radio Server Hosting</a>
             </div>
             <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
+        </div>
+    </div>
+
+    <div class="section" id="horario">
+        <div class="section-content">
+            <h2>Próximas Sesiones</h2>
+            <p style="color: #888; margin-top: 20px;">Cada tarde, la mejor selección de House Music directamente desde el móvil a tus oídos. Consulta la programación semanal.</p>
+        </div>
+    </div>
+
+    <div class="section" id="artistas">
+        <div class="section-content">
+            <h2>Nuestros Artistas</h2>
+            <p style="color: #888; margin-top: 20px;">Toda la música es mezclada 24/7 en loop directo para que el ritmo no pare nunca.</p>
+        </div>
+    </div>
+
+    <div class="section" id="contacto">
+        <div class="section-content">
+            <h2>Sintoniza</h2>
+            <p style="color: #888; margin-top: 20px;">Accede con un simple clic. dTardeo House Station es la banda sonora de tus mejores momentos.</p>
         </div>
     </div>
 
