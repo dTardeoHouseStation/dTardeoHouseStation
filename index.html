@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dTardeoHouseStation | Premium Radio</title>
+    <title>dTardeo House Station | Premium Radio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,10 +15,11 @@
         body, html {
             height: 100%;
             font-family: 'Montserrat', sans-serif;
-            overflow: hidden; /* Evita scroll innecesario */
+            background-color: #000;
+            color: white;
         }
 
-        /* Contenedor del fondo con la imagen que me has pasado */
+        /* FONDO DE IMAGEN */
         .background-overlay {
             position: fixed;
             top: 0;
@@ -26,67 +28,111 @@
             height: 100%;
             background: url('fondo.png') no-repeat center center fixed;
             background-size: cover;
-            filter: brightness(0.7); /* Oscurece un poco para que resalte el reproductor */
-            z-index: -1;
+            filter: brightness(0.6);
+            z-index: -2;
         }
 
-        /* Capa de degradado estilo Ibiza Live Radio */
         .gradient-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
-            z-index: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.9) 100%);
+            z-index: -1;
         }
 
-        .main-container {
-            position: relative;
-            z-index: 1;
+        /* MENÚ TIPO IBIZA STARDUST */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.85rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #6C2BDD;
+        }
+
+        /* CONTENIDO PRINCIPAL */
+        .main-content {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             text-align: center;
-            padding: 20px;
+            padding-top: 80px; /* Espacio para el menú fijo */
         }
 
-        .logo-container img {
-            max-width: 300px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.5));
-        }
-
-        /* Estilo para el contenedor del reproductor de Caster.fm */
         .player-wrapper {
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px); /* Efecto cristal traslúcido */
-            padding: 30px;
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 25px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 100%;
+            width: 90%;
             max-width: 450px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
         }
 
-        .live-tag {
-            color: #6C2BDD;
-            font-weight: bold;
-            font-size: 14px;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-            display: block;
-            text-transform: uppercase;
-        }
-
-        footer {
-            position: absolute;
-            bottom: 20px;
-            color: rgba(255,255,255,0.5);
-            font-size: 12px;
+        .station-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
             letter-spacing: 1px;
+        }
+
+        .live-indicator {
+            color: #6C2BDD;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            display: block;
+        }
+
+        /* RESPONSIVE PARA MÓVILES */
+        @media (max-width: 768px) {
+            nav { padding: 0 20px; }
+            .nav-links { display: none; } /* Ocultamos links en móvil para simplificar */
+            .nav-logo { font-size: 1rem; }
         }
     </style>
 </head>
@@ -95,10 +141,20 @@
     <div class="background-overlay"></div>
     <div class="gradient-overlay"></div>
 
-    <div class="main-container">
-        
+    <nav>
+        <a href="#" class="nav-logo">dTARDEO HOUSE</a>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Schedule</a></li>
+            <li><a href="#">Artists</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
         <div class="player-wrapper">
-            <span class="live-tag">Live from the Beach</span>
+            <span class="live-indicator">On Air Now</span>
+            <h1 class="station-title">HOUSE STATION</h1>
             
             <div class="cstrEmbed" data-type="newStreamPlayer" data-publicToken="1f51f40c-d821-4ec5-9f7d-18e5384f69be" data-theme="dark" data-color="6C2BDD" data-channelId="" data-rendered="false">
                 <a href="https://www.caster.fm">Shoutcast Hosting</a> 
@@ -106,42 +162,8 @@
                 <a href="https://www.caster.fm">Radio Server Hosting</a>
             </div>
             <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
-            
         </div>
-
-        <footer>
-            &copy; 2026 dTardeoHouseStation | All Rights Reserved
-        </footer>
     </div>
-<script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
 
-    <script>
-        window.addEventListener('load', function() {
-            // Esperamos un momento para asegurarnos de que el widget de Caster.fm se ha cargado
-            setTimeout(function() {
-                // Buscamos el elemento de audio que crea el widget de Caster.fm
-                var cstrPlayer = document.querySelector('.cstrEmbed audio');
-                
-                if (cstrPlayer) {
-                    // Intentamos reproducir
-                    var playPromise = cstrPlayer.play();
-
-                    // Manejamos la promesa (necesario para navegadores modernos)
-                    if (playPromise !== undefined) {
-                        playPromise.then(_ => {
-                            // Autoplay exitoso
-                            console.log("Autoplay exitoso.");
-                        }).catch(error => {
-                            // Autoplay bloqueado por el navegador
-                            console.log("El navegador bloqueó el autoplay. Se requiere interacción del usuario.");
-                            // Aquí podrías mostrar un mensaje al usuario: "Haz clic en Play para escuchar".
-                        });
-                    }
-                }
-            }, 2000); // Espera 2 segundos (ajustar si es necesario)
-        });
-    </script>
-</body>
-</html>
 </body>
 </html>
