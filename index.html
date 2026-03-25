@@ -1,3 +1,8 @@
+Entendido, **Mr. Postigo**. Vamos a simplificar la estructura para que el diseño sea mucho más limpio y profesional. He eliminado el logo gigante del centro y he agrupado el **Logo y el Menú en la esquina superior izquierda**, creando una barra de navegación fluida.
+
+Aquí tiene el código definitivo con el mosaico `repeat.png` corregido y la nueva disposición:
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,74 +13,136 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body, html {
+        html, body {
             height: 100%;
             font-family: 'Montserrat', sans-serif;
-            background-color: #111; /* Un gris muy oscuro en lugar de negro total */
             color: white;
-            overflow-x: hidden;
+            background-color: #000; 
+            overflow: hidden; /* Evita scrolls innecesarios */
         }
 
-        /* FONDO DE MOSAICO CORREGIDO */
+        /* FONDO DE MOSAICO (repeat.png) */
         .background-texture {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: url('repeat.png');
             background-repeat: repeat;
+            background-size: 350px; 
             background-position: center;
-            background-size: 400px; /* Tamaño del patrón ajustable */
-            opacity: 0.3; /* Aumentamos un poco para que se vea, pero no tape */
-            z-index: -1;
+            opacity: 0.4; 
+            z-index: 1;
         }
 
-        /* HEADER */
+        /* CAPA DE CONTENIDO */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* BARRA SUPERIOR */
         header {
-            position: fixed;
-            top: 0; width: 100%; height: 90px;
-            background: rgba(0, 0, 0, 0.85); /* Más sólido para que se vea el menú */
-            backdrop-filter: blur(10px);
+            width: 100%;
+            height: 90px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(15px);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 30px;
-            border-bottom: 1px solid rgba(255, 170, 0, 0.3);
-            z-index: 1000;
+            padding: 0 40px;
+            border-bottom: 2px solid #ffaa00;
         }
 
-        .logo-img { height: 50px; }
+        /* AGRUPACIÓN LOGO + MENÚ IZQUIERDA */
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 40px; /* Espacio entre logo y el inicio del menú */
+        }
 
-        .nav-links { display: flex; list-style: none; gap: 20px; }
+        .logo-img { 
+            height: 55px; 
+            transition: transform 0.3s;
+        }
+        
+        .logo-img:hover { transform: scale(1.05); }
+
+        .nav-links { 
+            display: flex; 
+            list-style: none; 
+            gap: 25px; 
+        }
+
         .nav-links a {
-            text-decoration: none; color: #fff; font-size: 0.75rem;
-            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            text-decoration: none; 
+            color: #fff; 
+            font-size: 0.75rem;
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            opacity: 0.7;
+            transition: 0.3s;
         }
 
-        /* REPRODUCTOR */
+        .nav-links a:hover { 
+            opacity: 1; 
+            color: #ffaa00; 
+        }
+
+        /* REPRODUCTOR DERECHA */
         .header-player {
             display: flex;
             align-items: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px 10px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 5px 15px;
             border-radius: 8px;
+            border: 1px solid rgba(255, 170, 0, 0.2);
         }
 
-        .cstrEmbed { transform: scale(0.8); transform-origin: right center; }
+        .cstrEmbed { 
+            transform: scale(0.85); 
+            transform-origin: right center; 
+        }
 
-        /* HERO */
-        .main-content {
-            height: 100vh;
+        /* CUERPO CENTRAL (VACÍO PARA RESALTAR EL FONDO) */
+        .hero {
+            flex: 1;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
         }
 
-        .main-logo-big { max-width: 350px; width: 80%; filter: drop-shadow(0 0 20px #000); }
+        .hero-text {
+            font-size: 0.7rem;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            color: #ffaa00;
+            font-weight: 900;
+            opacity: 0.8;
+            text-shadow: 0 0 20px rgba(0,0,0,1);
+        }
 
+        /* MÓVIL */
         @media (max-width: 768px) {
-            header { height: auto; padding: 15px; flex-direction: column; gap: 10px; }
-            .nav-links { gap: 10px; }
-            .main-logo-big { max-width: 250px; }
+            header { 
+                height: auto; 
+                padding: 20px; 
+                flex-direction: column; 
+                gap: 20px; 
+            }
+            .header-left {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-links { gap: 15px; }
+            .cstrEmbed { transform: scale(0.8); }
         }
     </style>
 </head>
@@ -83,31 +150,44 @@
 
     <div class="background-texture"></div>
 
-    <header>
-        <div class="header-logo">
-            <img src="logo.png" alt="dTardeo" class="logo-img">
-        </div>
+    <div class="content-wrapper">
+        <header>
+            <div class="header-left">
+                <a href="#">
+                    <img src="logo.png" alt="dTardeo" class="logo-img">
+                </a>
 
-        <nav>
-            <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Schedule</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-
-        <div class="header-player">
-            <div class="cstrEmbed" data-type="newStreamPlayer" data-publicToken="1f51f40c-d821-4ec5-9f7d-18e5384f69be" data-theme="dark" data-color="6C2BDD" data-channelId="" data-rendered="false">
-                <a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Schedule</a></li>
+                        <li><a href="#">Artists</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
             </div>
-        </div>
-    </header>
 
-    <main class="main-content">
-        <img src="logo.png" alt="dTardeo House Station" class="main-logo-big">
-    </main>
+            <div class="header-player">
+                <div class="cstrEmbed" data-type="newStreamPlayer" data-publicToken="1f51f40c-d821-4ec5-9f7d-18e5384f69be" data-theme="dark" data-color="6C2BDD" data-channelId="" data-rendered="false">
+                    <a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="hero">
+            <p class="hero-text">BENALMÁDENA • COSTA DEL SOL</p>
+        </main>
+    </div>
 
     <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
 
 </body>
 </html>
+```
+
+### ¿Qué hemos logrado con este cambio, Mr. Postigo?
+1.  **Foco en el Fondo:** Al eliminar el logo del centro, el mosaico `repeat.png` ahora es el protagonista visual de la web.
+2.  **Navegación Intuitiva:** El logo y el menú ahora trabajan juntos en el bloque izquierdo, dejando el lado derecho libre para el reproductor.
+3.  **Hero Minimalista:** He añadido un pequeño texto de "BENALMÁDENA" con mucho espaciado, que le da un toque de elegancia sin tapar el patrón de fondo.
+
+¿Le parece que la distribución es ahora más cómoda para sus oyentes?
